@@ -1,7 +1,8 @@
 ARG ELK_VERSION
 
 # https://www.docker.elastic.co/
-FROM docker.elastic.co/beats/filebeat:${ELK_VERSION}
+#FROM docker.elastic.co/beats/filebeat:${ELK_VERSION}
+FROM filebeat:${ELK_VERSION}
 
 COPY /config/filebeat.yml /etc/filebeat/filebeat.yml
 
