@@ -101,7 +101,7 @@ services:
       - djangoapp
 
   djangoapp:
-    command: bash -c "python manage.py makemigrations && python manage.py migrate&& && uwsgi --ini /opt/python_project/app/uwsgi.ini"
+#    command: uwsgi --ini /opt/python_project/app/uwsgi.ini # 没用
     build:
       context: ./compose/django_demo/
     environment:
