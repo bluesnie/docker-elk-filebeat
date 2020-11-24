@@ -88,6 +88,8 @@ services:
   filebeat:
     build:
       context: ./compose/filebeat/
+      args:
+        ELK_VERSION: $ELK_VERSION
     volumes:
       - type: volume
         source: logs_volume
