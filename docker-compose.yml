@@ -101,7 +101,7 @@ services:
       - djangoapp
 
   djangoapp:
-    command: /bin/bash ./start.sh
+    command: /bin/bash /opt/python_project/app/start.sh
     build:
       context: ./compose/django_demo/
     environment:
