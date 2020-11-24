@@ -101,9 +101,11 @@ services:
       - djangoapp
 
   djangoapp:
-#    command: uwsgi --ini /opt/python_project/app/uwsgi.ini # 没用
+    command: uwsgi --ini /opt/python_project/app/uwsgi.ini # 没用
     build:
       context: ./compose/django_demo/
+    expose:
+      - "8000"
     environment:
       DEBUG: 'True'
     volumes:
