@@ -3,7 +3,7 @@ version: '3.2'
 services:
   elasticsearch:
     build:
-      context: /compose/elasticsearch/
+      context: ./compose/elasticsearch/
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
@@ -29,7 +29,7 @@ services:
 
   logstash:
     build:
-      context: /compose/logstash/
+      context: ./compose/logstash/
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
@@ -56,7 +56,7 @@ services:
 
   kibana:
     build:
-      context: /compose/kibana/
+      context: ./compose/kibana/
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
@@ -75,7 +75,7 @@ services:
 
   nginx:
     build:
-      context: /compose/nginx/
+      context: ./compose/nginx/
     ports:
       - "80:80"
       - "8000:8000"
@@ -87,7 +87,7 @@ services:
 
   filebeat:
     build:
-      context: /compose/filebeat/
+      context: ./compose/filebeat/
     volumes:
       - type: volume
         source: logs_volume
@@ -101,7 +101,7 @@ services:
   djangoapp:
     command: /bin/bash ./start.sh
     build:
-      context: /compose/django_demo/
+      context: ./compose/django_demo/
     environment:
       DEBUG: 'True'
     volumes:
