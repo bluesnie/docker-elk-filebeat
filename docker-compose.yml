@@ -1,0 +1,120 @@
+version: '3.2'
+
+services:
+  elasticsearch:
+    build:
+      context: /compose/elasticsearch/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - type: bind
+        source: ./compose/elasticsearch/config/elasticsearch.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        read_only: true
+      - type: volume
+        source: elasticsearch
+        target: /usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_PASSWORD: changeme
+      # Use single node discovery in order to disable production mode and avoid bootstrap checks.
+      # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+      discovery.type: single-node
+    networks:
+      - elk
+    restart: always
+
+  logstash:
+    build:
+      context: /compose/logstash/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - type: bind
+        source: ./compose/logstash/config/logstash.yml
+        target: /usr/share/logstash/config/logstash.yml
+        read_only: true
+      - type: bind
+        source: ./compose/logstash/pipeline
+        target: /usr/share/logstash/pipeline
+        read_only: true
+    ports:
+      - "5044:5044"
+      - "5000:5000/tcp"
+      - "5000:5000/udp"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+    restart: always
+
+  kibana:
+    build:
+      context: /compose/kibana/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - type: bind
+        source: ./compose/kibana/config/kibana.yml
+        target: /usr/share/kibana/config/kibana.yml
+        read_only: true
+    ports:
+      - "5601:5601"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+      - logstash
+    restart: always
+
+  nginx:
+    build:
+      context: /compose/nginx/
+    ports:
+      - "80:80"
+      - "8000:8000"
+    networks:
+      - elk
+    depends_on:
+      - djangoapp
+    restart: always
+
+  filebeat:
+    build:
+      context: /compose/filebeat/
+    volumes:
+      - type: volume
+        source: logs_volume
+        target: /var/logs
+    command: filebeat -c /etc/filebeat/filebeat.yml -e -d "*" -strict.perms=false
+    networks:
+      - elk
+    depends_on:
+      - djangoapp
+
+  djangoapp:
+    command: /bin/bash ./start.sh
+    build:
+      context: /compose/django_demo/
+    environment:
+      DEBUG: 'True'
+    volumes:
+      - type: volume
+        source: logs_volume
+        target: /opt/python_project/app/logs
+    networks:
+      - elk
+
+networks:
+  elk:
+    driver: bridge
+
+volumes:
+  elasticsearch:
+  logs_volume:

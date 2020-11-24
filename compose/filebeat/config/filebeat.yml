@@ -1,0 +1,13 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/logs/*
+
+#output.logstash:
+#  hosts: ["logstash:5044"]
+
+output.kafka:
+  # kafka ip:端口（到时候考虑怎么整合在一起）
+  hosts: ["10.211.55.4:32770","10.211.55.4:32771","10.211.55.4:32769"]
+  topic: 'kafka_topic'
