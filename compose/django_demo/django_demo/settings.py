@@ -125,7 +125,7 @@ USE_TZ = False
 STATIC_URL = '/static/'
 
 APP_ID = "app"
-LOG_PATH = os.path.join(BASE_DIR, 'logs')
+LOG_PATH = '/tmp'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,  # 禁用已经存在的logger实例

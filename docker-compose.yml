@@ -114,7 +114,7 @@ services:
     volumes:
       - type: volume
         source: logs_volume
-        target: /opt/python_project/app/logs
+        target: /tmp
 #    command: uwsgi --ini /opt/python_project/app/uwsgi.ini
     restart: always
     tty: true
