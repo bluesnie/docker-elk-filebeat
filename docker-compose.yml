@@ -98,6 +98,7 @@ services:
       - type: volume
         source: logs_volume
         target: /var/logs
+      - ./compose/filebeat/config/filebeat.yml:/etc/filebeat/filebeat.yml
     command: filebeat -c /etc/filebeat/filebeat.yml -e -d "*" -strict.perms=false
     networks:
       - elk
