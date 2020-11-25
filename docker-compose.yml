@@ -111,8 +111,10 @@ services:
       - type: volume
         source: logs_volume
         target: /opt/python_project/app/logs
-    command: uwsgi --ini /opt/python_project/app/uwsgi.ini # 没用
+    command: uwsgi --ini /opt/python_project/app/uwsgi.ini
     restart: always
+    tty: true
+    stdin_open: true
     networks:
       - elk
 
