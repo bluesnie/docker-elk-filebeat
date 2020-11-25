@@ -129,10 +129,3 @@ networks:
 volumes:
   elasticsearch:
   logs_volume:
-
-
-
-    nginx_1          | 192.168.1.1 - - [25/Nov/2020:02:41:31 +0000] "GET / HTTP/1.1" 502 559 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36" "-"
-    nginx_1          | 2020/11/25 02:41:31 [error] 20#20: *13 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.1, server: , request: "GET / HTTP/1.1", upstream: "uwsgi://172.23.0.3:8080", host: "192.168.1.218:8000"
-    nginx_1          | 2020/11/25 02:41:32 [error] 20#20: *15 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.1, server: , request: "GET /favicon.ico HTTP/1.1", upstream: "uwsgi://172.23.0.3:8080", host: "192.168.1.218:8000", referrer: "http://192.168.1.218:8000/"
-    nginx_1          | 192.168.1.1 - - [25/Nov/2020:02:41:32 +0000] "GET /favicon.ico HTTP/1.1" 502 559 "http://192.168.1.218:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36" "-"
