@@ -1,6 +1,6 @@
 asgiref==3.2.10
-Django==3.1.1
-djangorestframework==3.11.1
+Django==2.2.2
+djangorestframework==3.11.0
 JSON-log-formatter==0.3.0
 pytz==2020.1
 uWSGI==2.0.18
