@@ -115,6 +115,7 @@ services:
       - type: volume
         source: logs_volume
         target: /tmp
+      - ./compose/django_demo:/opt/python_project/app
 #    command: uwsgi --ini /opt/python_project/app/uwsgi.ini
     restart: always
     tty: true
