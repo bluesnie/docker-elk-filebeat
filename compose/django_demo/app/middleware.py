@@ -80,10 +80,11 @@ class LogsMiddleware(MiddlewareMixin):
                 data = response.data
             else:
                 data = {}
+            data = json.dumps(data) if not isinstance(data, set) else data  # 集合不能 json 化
             response_data = {
                 "status_code": response.status_code,
                 "reason_phrase": response.reason_phrase,
-                "data": json.dumps(data)
+                "data": data
             }
         else:
             response_data = {
