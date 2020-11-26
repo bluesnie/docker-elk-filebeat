@@ -1,13 +1,49 @@
 filebeat.inputs:
+# 通配
+#- type: log
+#  enabled: true
+#  paths:
+#    - /var/logs/*.json
+
+# 单独处理
 - type: log
   enabled: true
   paths:
-    - /var/logs/*
+    - /var/logs/all.json
+  fields:
+    filetype: djangoapp_all  # 自定义字段用于区分
+
+- type: log
+  enabled: true
+  paths:
+    - /var/logs/print.json
+  fields:
+    filetype: djangoapp_print
+
+- type: log
+  enabled: true
+  paths:
+    - /var/logs/request_response.json
+  fields:
+    filetype: djangoapp_req_res
+
+- type: log
+  enabled: true
+  paths:
+    - /var/logs/exception.json
+  fields:
+    filetype: djangoapp_exception
+
+processors:
+ - decode_json_fields:
+     fields: ['message']
+     target: ''
+     overwrite_keys: true
 
 #output.logstash:
 #  hosts: ["logstash:5044"]
 
 output.kafka:
-  # kafka ip:端口（到时候考虑怎么整合在一起）
-  hosts: ["10.211.55.4:32770","10.211.55.4:32771","10.211.55.4:32769"]
+  # kafka ip:端口
+  hosts: ["192.168.1.218:32770","192.168.1.218:32771"]
   topic: 'kafka_topic'
