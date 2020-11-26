@@ -65,7 +65,7 @@ class LogsMiddleware(MiddlewareMixin):
             "method": request.method,
             "path": request.path,
             "path_info": request.path_info,
-            "body": body,
+            "body": json.dumps(body),
             "sip": request.META.get('REMOTE_ADDR', ''),
             "dip": socket.gethostbyname(socket.gethostname()),
         }
@@ -83,7 +83,7 @@ class LogsMiddleware(MiddlewareMixin):
             response_data = {
                 "status_code": response.status_code,
                 "reason_phrase": response.reason_phrase,
-                "data": data
+                "data": json.dumps(data)
             }
         else:
             response_data = {
