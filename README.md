@@ -19,7 +19,7 @@
 
     
 - [Kafka](https://github.com/wurstmeister/kafka-docker.git)
-    - [安装说明](https://www.cnblogs.com/qa-freeroad/p/13780405.html)
+    - [安装说明及使用](https://www.cnblogs.com/qa-freeroad/p/13780405.html)
 
 - 架构图
     

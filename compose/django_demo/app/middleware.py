@@ -65,7 +65,7 @@ class LogsMiddleware(MiddlewareMixin):
             "method": request.method,
             "path": request.path,
             "path_info": request.path_info,
-            "body": json.dumps(body),
+            "body": json.dumps(body) if body else None,
             "sip": request.META.get('REMOTE_ADDR', ''),
             "dip": socket.gethostbyname(socket.gethostname()),
         }
