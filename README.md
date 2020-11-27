@@ -20,6 +20,8 @@
     
 - [Kafka](https://github.com/wurstmeister/kafka-docker.git)
     - [安装说明及使用](https://www.cnblogs.com/qa-freeroad/p/13780405.html)
+    - ~~kafka 等端口映射失败，请先删除已创建的容器，在运行 docker-compose up -d~~
+    - 不建议端口绑定，绑定了不能扩容 kafka 实例
 
 - 架构图
     
