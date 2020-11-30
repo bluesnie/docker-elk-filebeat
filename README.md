@@ -1,6 +1,23 @@
 ###### datetime:2020/11/24 11:15
 ###### author:nzb
 
+## 目录树
+```text
+docker-elk-filebeat
+    ├── compose                       
+    │    ├─ filebeat                  
+    │    ├─ logstash                  
+    │    ├─ elasticsearch             
+    │    ├─ kibana                    
+    │    ├─ nginx                      
+    │    └─ django_demo                
+    ├── imgs                                     
+    ├── .gitignore
+    ├── .env                          
+    ├── docker-compose.yml                  
+    └── README.md                
+```
+
 > 配置镜像源， docker-compose 的时候会经常超时，重新运行命令即可，不会影响前面已经拉取构建的镜像
 
 - 配置文件
