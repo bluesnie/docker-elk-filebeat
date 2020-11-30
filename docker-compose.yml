@@ -73,22 +73,6 @@ services:
       - logstash
     restart: always
 
-  nginx:
-    build:
-      context: ./compose/nginx/
-    ports:
-      - "80:80"
-      - "8000:8000"
-    volumes:
-      - type: bind
-        source: ./compose/nginx/config/nginx.conf
-        target: /etc/nginx/conf.d/nginx.conf
-    networks:
-      - elk
-    depends_on:
-      - djangoapp
-    restart: always
-
   filebeat:
     build:
       context: ./compose/filebeat/
@@ -102,8 +86,24 @@ services:
     command: filebeat -c /etc/filebeat/filebeat.yml -e -d "*" -strict.perms=false
     networks:
       - elk
-    depends_on:
-      - djangoapp
+#    depends_on:
+#      - djangoapp
+
+  nginx:
+    build:
+      context: ./compose/nginx/
+    ports:
+      - "80:80"
+      - "8000:8000"
+    volumes:
+      - type: bind
+        source: ./compose/nginx/config/nginx.conf
+        target: /etc/nginx/conf.d/nginx.conf
+    networks:
+      - elk
+#    depends_on:
+#      - djangoapp
+    restart: always
 
   djangoapp:
     build:
