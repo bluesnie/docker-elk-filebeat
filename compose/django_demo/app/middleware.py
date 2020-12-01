@@ -61,11 +61,16 @@ class LogsMiddleware(MiddlewareMixin):
         else:
             body.update(dict(request.POST))
 
+        try:
+            body = json.dumps(body) if body else None
+        except Exception as e:
+            body = json.dumps({"Request's body Json Dumps's ExceptionMsg": e.args})
+
         request_data = {
             "method": request.method,
             "path": request.path,
             "path_info": request.path_info,
-            "body": json.dumps(body) if body else None,
+            "body": body,
             "sip": request.META.get('REMOTE_ADDR', ''),
             "dip": socket.gethostbyname(socket.gethostname()),
         }
@@ -80,7 +85,12 @@ class LogsMiddleware(MiddlewareMixin):
                 data = response.data
             else:
                 data = {}
-            data = json.dumps(data) if not isinstance(data, set) else data  # 集合不能 json 化
+
+            try:
+                data = json.dumps(data) if not isinstance(data, set) else data  # 集合不能 json 化
+            except Exception as e:
+                data = json.dumps({"Response's data Json Dumps's ExceptionMsg": e.args})
+
             response_data = {
                 "status_code": response.status_code,
                 "reason_phrase": response.reason_phrase,

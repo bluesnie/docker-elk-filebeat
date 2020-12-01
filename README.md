@@ -48,6 +48,25 @@ docker-elk-filebeat
             - 删除某个 topic：`kafka-topics.sh --delete --zookeeper $ZK --topic test_topic`
             - 开启生产者：``kafka-console-consumer.sh --topic test_topic --broker-list `broker-list.sh` ``    
             - 开启消费者：`kafka-console-consumer.sh --topic=test_topic --bootstrap-server=<DOCKER_HOST_IP:KAFKA_PORT>` 
+    
+    - kafka 外网内网配置：Kafka 无法外网访问问题解决方法
+        
+        编辑 server.properties
+        
+        - 外网配置
+            ```
+                #listeners=PLAINTEXT://:9092
+                advertised.listeners=PLAINTEXT://x.x.x.x:9092
+                zookeeper.connect=localhost:2181
+            ```
+
+        - 内网配置
+            ```
+                #listeners=PLAINTEXT://:9092
+                listeners=PLAINTEXT://x.x.x.x:9092
+                zookeeper.connect=localhost:2181
+            ```
+            
     - tips
         - ~~kafka 等端口映射失败，请先删除已创建的容器，在运行 docker-compose up -d~~
         - 消费报错时可以尝试删除容器重新启动

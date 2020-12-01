@@ -1,44 +1,44 @@
 filebeat.inputs:
-# 通配
-#- type: log
-#  enabled: true
-#  paths:
-#    - /var/logs/*.json
+  # 通配
+  #- type: log
+  #  enabled: true
+  #  paths:
+  #    - /var/logs/*.json
 
-# 单独处理
-- type: log
-  enabled: true
-  paths:
-    - /var/logs/all.json
-  fields:
-    filetype: djangoapp_all  # 自定义字段用于区分
+  # 单独处理
+  - type: log
+    enabled: true
+    paths:
+      - /var/logs/all.json
+    fields:
+      filetype: djangoapp_all  # 自定义字段用于区分
 
-- type: log
-  enabled: true
-  paths:
-    - /var/logs/print.json
-  fields:
-    filetype: djangoapp_print
+  - type: log
+    enabled: true
+    paths:
+      - /var/logs/print.json
+    fields:
+      filetype: djangoapp_print
 
-- type: log
-  enabled: true
-  paths:
-    - /var/logs/request_response.json
-  fields:
-    filetype: djangoapp_req_res
+  - type: log
+    enabled: true
+    paths:
+      - /var/logs/request_response.json
+    fields:
+      filetype: djangoapp_req_res
 
-- type: log
-  enabled: true
-  paths:
-    - /var/logs/exception.json
-  fields:
-    filetype: djangoapp_exception
+  - type: log
+    enabled: true
+    paths:
+      - /var/logs/exception.json
+    fields:
+      filetype: djangoapp_exception
 
 processors:
- - decode_json_fields:
-     fields: ['message']
-     target: ''
-     overwrite_keys: true
+  - decode_json_fields:
+      fields: ['message']
+      target: ''
+      overwrite_keys: true
 
 #output.logstash:
 #  hosts: ["logstash:5044"]
