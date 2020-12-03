@@ -21,8 +21,10 @@ docker-elk-filebeat
 > 配置镜像源， docker-compose 的时候会经常超时，重新运行命令即可，不会影响前面已经拉取构建的镜像
 
 - 配置文件
-    - filebeat：[filebeat.yml](./compose/filebeat/config/filebeat.yml) 输出配置
-    - logstash：[logstash.conf](./compose/logstash/pipeline/logstash.conf) 输入配置     
+    - filebeat：[filebeat.yml](./compose/filebeat/config/filebeat.yml)
+    - logstash：[logstash.conf](./compose/logstash/pipeline/logstash.conf)
+    - kibana：[kibana.yml](./compose/kibana/config/kibana.yml)
+         
     - elasticsearch 账号密码：
         - [logstash.conf](./compose/logstash/pipeline/logstash.conf)    
         - [kibana.yml](./compose/kibana/config/kibana.yml)
