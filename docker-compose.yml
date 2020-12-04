@@ -25,7 +25,7 @@ services:
       discovery.type: single-node
     networks:
       - elk
-    restart: always
+#    restart: always
 
   logstash:
     build:
@@ -52,7 +52,7 @@ services:
       - elk
     depends_on:
       - elasticsearch
-    restart: always
+#    restart: always
 
   kibana:
     build:
@@ -71,7 +71,7 @@ services:
     depends_on:
       - elasticsearch
       - logstash
-    restart: always
+#    restart: always
 
   filebeat:
     build:
@@ -103,7 +103,7 @@ services:
       - elk
 #    depends_on:
 #      - djangoapp
-    restart: always
+#    restart: always
 
   djangoapp:
     build:
@@ -118,7 +118,7 @@ services:
         target: /tmp
       - ./compose/django_demo:/opt/python_project/app
 #    command: uwsgi --ini /opt/python_project/app/uwsgi.ini
-    restart: always
+#    restart: always
     tty: true
     stdin_open: true
     networks:
