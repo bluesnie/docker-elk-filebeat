@@ -45,7 +45,7 @@ class LogsMiddleware(MiddlewareMixin):
     def get_user_info(request):
         return {
             "id": request.user.id,
-            "username": request.user.phone if request.user.id else request.user.username
+            "username": request.user.username if request.user.id else ''
         }
 
     @staticmethod
